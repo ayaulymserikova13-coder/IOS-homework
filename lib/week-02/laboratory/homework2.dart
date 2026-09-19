@@ -54,7 +54,7 @@ void main() {
   String? userName='Ayaulym';
   double balance=10000.0;
   checkBalance(
-    name: userName!,
+    name: userName,
     balance: balance,
   );
   balance=deposit(
