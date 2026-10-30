@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+
 import '../models/product.dart';
 import '../widgets/product_tile.dart';
 import '../widgets/product_card.dart';
@@ -19,16 +19,86 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   List<Product> initialProducts() {
     return [
-      Product(id: 1, title: 'Lavender Cardigan', category: 'Knitwear', price: 18900, rating: 4.9),
-      Product(id: 2, title: 'Floral Dress', category: 'Dresses', price: 24900, rating: 4.8),
-      Product(id: 3, title: 'Straight Jeans', category: 'Denim', price: 21900, rating: 4.7),
-      Product(id: 4, title: 'Satin Blouse', category: 'Tops', price: 15900, rating: 4.8),
-      Product(id: 5, title: 'Classic Trench Coat', category: 'Outerwear', price: 39900, rating: 4.9),
-      Product(id: 6, title: 'Cotton T-Shirt', category: 'Basics', price: 7900, rating: 4.6),
-      Product(id: 7, title: 'Pleated Skirt', category: 'Skirts', price: 13900, rating: 4.7),
-      Product(id: 8, title: 'Cozy Sweater', category: 'Knitwear', price: 17900, rating: 4.9),
-      Product(id: 9, title: 'Wide Leg Pants', category: 'Pants', price: 19900, rating: 4.8),
-      Product(id: 10, title: 'Casual Hoodie', category: 'Hoodies', price: 14900, rating: 4.7),
+      Product(
+        id: 1,
+        title: 'Lavender Cardigan',
+        category: 'Knitwear',
+        price: 18900,
+        rating: 4.9,
+        imageUrl: 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/422922/item/goods_70_422922.jpg',
+      ),
+      Product(
+        id: 2,
+        title: 'Floral Dress',
+        category: 'Dresses',
+        price: 24900,
+        rating: 4.8,
+        imageUrl: 'https://xcdn.next.co.uk/common/items/default/default/itemimages/3_4Ratio/product/lge/W68035s5.jpg',
+      ),
+      Product(
+        id: 3,
+        title: 'Straight Jeans',
+        category: 'Denim',
+        price: 21900,
+        rating: 4.7,
+        imageUrl: 'https://frame-store.com/cdn/shop/files/LMSBT889-WERN-F-V2_jeans-front-packshot-image.jpg?width=600',
+      ),
+      Product(
+        id: 4,
+        title: 'Satin Blouse',
+        category: 'Tops',
+        price: 15900,
+        rating: 4.8,
+        imageUrl: 'https://osmanbeytextiles.com/images/look-blouses.jpg',
+      ),
+      Product(
+        id: 5,
+        title: 'Classic Trench Coat',
+        category: 'Outerwear',
+        price: 39900,
+        rating: 4.9,
+        imageUrl: 'https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/467151/item/goods_30_467151_3x4.jpg?width=600',
+      ),
+      Product(
+        id: 6,
+        title: 'Cotton T-Shirt',
+        category: 'Basics',
+        price: 7900,
+        rating: 4.6,
+        imageUrl: 'https://cdn11.bigcommerce.com/s-rxzabllq/images/stencil/1920x1920/products/454/31677/TS20_Aaron_Unisex_Plain_Tshirt_White__73953.1783996956.jpg?c=2&imbypass=on',
+      ),
+      Product(
+        id: 7,
+        title: 'Pleated Skirt',
+        category: 'Skirts',
+        price: 13900,
+        rating: 4.7,
+        imageUrl: 'https://i1.adis.ws/i/truworths/prod3160086_1.jpeg',
+      ),
+      Product(
+        id: 8,
+        title: 'Cozy Sweater',
+        category: 'Knitwear',
+        price: 17900,
+        rating: 4.9,
+        imageUrl: 'https://i.pinimg.com/736x/ec/15/0e/ec150e14a6be6c2b5213a4780ef6f377.jpg',
+      ),
+      Product(
+        id: 9,
+        title: 'Wide Leg Pants',
+        category: 'Pants',
+        price: 19900,
+        rating: 4.8,
+        imageUrl: 'https://image.hm.com/assets/hm/98/4b/984b17eb5522a50d5abca540a368c4511afc22e4.jpg',
+      ),
+      Product(
+        id: 10,
+        title: 'Casual Hoodie',
+        category: 'Hoodies',
+        price: 14900,
+        rating: 4.7,
+        imageUrl: 'https://1stclassuniforms.co.uk/cdn/shop/products/W72Red.jpg?width=600',
+      ),
     ];
   }
 
@@ -48,9 +118,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 
   Future<void> refreshCatalog() async {
-    await Future.delayed(
-      const Duration(milliseconds: 1500),
-    );
+    await Future.delayed(const Duration(milliseconds: 1500));
 
     if (!mounted) return;
 
@@ -61,6 +129,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
           id: nextId,
           title: 'New Arrival $nextId',
           category: 'New Collection',
+          imageUrl: initialProducts()[(nextId - 11) % 10].imageUrl,
           price: 12900,
           rating: 4.9,
         ),
@@ -70,9 +139,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 
   void deleteProduct(Product product) {
-    final index = products.indexWhere(
-      (item) => item.id == product.id,
-    );
+    final index = products.indexWhere((item) => item.id == product.id);
 
     if (index == -1) return;
 
@@ -96,10 +163,9 @@ class _CatalogScreenState extends State<CatalogScreen> {
             }
 
             setState(() {
-              final restoreIndex =
-                  index > products.length
-                      ? products.length
-                      : index;
+              final restoreIndex = index > products.length
+                  ? products.length
+                  : index;
 
               products.insert(restoreIndex, product);
             });
@@ -151,10 +217,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   const SizedBox(height: 16),
                   const Text(
                     'Catalog is Empty',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
                   ElevatedButton(
@@ -173,16 +236,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       padding: const EdgeInsets.all(16),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 0.72,
-                      ),
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 0.72,
+                          ),
                       itemCount: products.length,
                       itemBuilder: (context, index) {
-                        return ProductCard(
-                          product: products[index],
-                        );
+                        return ProductCard(product: products[index]);
                       },
                     )
                   : ListView.separated(
@@ -193,10 +254,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       ),
                       itemCount: products.length,
                       separatorBuilder: (context, index) =>
-                          const Divider(
-                        height: 1,
-                        color: Color(0xFFE9DDF1),
-                      ),
+                          const Divider(height: 1, color: Color(0xFFE9DDF1)),
                       itemBuilder: (context, index) {
                         final product = products[index];
 

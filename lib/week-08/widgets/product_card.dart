@@ -1,14 +1,11 @@
-
 import 'package:flutter/material.dart';
+
 import '../models/product.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
 
-  const ProductCard({
-    super.key,
-    required this.product,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +14,7 @@ class ProductCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(
-          color: const Color(0xFFE9DDF1),
-        ),
+        border: Border.all(color: const Color(0xFFE9DDF1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,10 +26,18 @@ class ProductCard extends StatelessWidget {
                 color: const Color(0xFFEEE3F5),
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: const Icon(
-                Icons.checkroom,
-                size: 48,
-                color: Color(0xFF906CB1),
+              clipBehavior: Clip.antiAlias,
+              child: Image.network(
+                product.imageUrl,
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.contain,
+                webHtmlElementStrategy: WebHtmlElementStrategy.prefer,
+                errorBuilder: (context, error, stackTrace) => const Icon(
+                  Icons.checkroom,
+                  size: 48,
+                  color: Color(0xFF906CB1),
+                ),
               ),
             ),
           ),
@@ -43,10 +46,7 @@ class ProductCard extends StatelessWidget {
 
           Text(
             product.category,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF906CB1),
-            ),
+            style: const TextStyle(fontSize: 12, color: Color(0xFF906CB1)),
           ),
 
           const SizedBox(height: 6),
@@ -55,21 +55,14 @@ class ProductCard extends StatelessWidget {
             product.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
 
           const SizedBox(height: 6),
 
           Row(
             children: [
-              const Icon(
-                Icons.star,
-                color: Color(0xFFD5A044),
-                size: 16,
-              ),
+              const Icon(Icons.star, color: Color(0xFFD5A044), size: 16),
               const SizedBox(width: 4),
               Text('${product.rating}'),
             ],
